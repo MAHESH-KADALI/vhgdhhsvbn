@@ -20,8 +20,8 @@ class TG_CONFIG:
     stringhi = "BQD6zg0As0jMe838fXnvcfpUgY_05uuCaDpsOnMDqd9lBe1A02aKjZPzpqzKH_u1N-53bSPJEG0t2amKfsuYIoFTaidHXSy8BKiE2VTZ-dbJ8RyU-FlV1UUo6H8D3OmOXOVRJPdB09-Og99nqklo-9ZhCt9fPNc033qT3wUjA7YZXF5AlYX6E3AbXz216tcWgKqPxOdVJ2J3lsmkjq810pcZKS4HBJFc5uAIpCZf2Gfh2Eh9ohbkPo4YuDy9uKBaf3yoK3_nxb_a7aSPzfvq1fDvYO3YmzavdWjd9dyYLIV_8ZLv0O-p6rOMbj-nySM7GqQBUsp095QeqFopkKs_z283Hl8T-AAAAABHP54rAA"
     UPSTREAM_REPO = "https://github.com/aryanchy4499/mtl1"
     UPSTREAM_BRANCH = "main"
-    bot_token = "7301903414:AAEXa7-mPWmokaOGWK0gNmdpXZlUrzEfJ_A"
-    owner_id = 1996570767
+    bot_token = "7315918217:AAEyNo0_rpk_2IlsmdZibZJZREpyPWQTevY"
+    owner_id = 1596559467
     #DEVS or #OWNERS
     sudo_users = [1596559467, -1002230874428, -1002233833025, 1996570767]
     session = "maheshiassistantbot"
