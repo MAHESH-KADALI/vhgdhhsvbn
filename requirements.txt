@@ -13,3 +13,4 @@ lxml
 pywidevine
 telegraph
 python-dateutil
+nest_asyncio
