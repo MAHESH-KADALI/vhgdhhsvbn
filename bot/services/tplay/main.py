@@ -85,7 +85,7 @@ class TPLAY:
 
         name = "{} {}".format(init_title, time_data)
 
-        self.msg.delete()
+        #self.msg.delete()
 
         Processor(
             self.app, 
