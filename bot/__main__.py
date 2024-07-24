@@ -71,7 +71,7 @@ if TG_CONFIG.stringhi:
 else:
     USERBOT = None
 
-Start_Time = time.time()
+#Start_Time = time.time()
 
 
 
