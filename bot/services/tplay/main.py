@@ -1,3 +1,4 @@
+
 from bot.config import LOG_MESSAGE
 from bot.helpers.parser.mpd import mpd_table
 from bot.helpers.ott_parser import ott_argument_parser
@@ -7,7 +8,15 @@ from bot.helpers.download.mpd import Processor
 from bot.helpers.utils import add_quotes_to_title
 
 class TPLAY:
-    def __init__(self, command, app, message):
+    def __init__(self, command: str, app, message):
+        """
+        Initialize the TPLAY class.
+
+        Args:
+        - command (str): The command to be executed.
+        - app: The application instance.
+        - message: The message instance.
+        """
         self.app = app
         self.message = message
         self.ott = "TPLAY"
@@ -24,6 +33,15 @@ class TPLAY:
 
     @staticmethod
     def check_catchup_data(parsed_args):
+        """
+        Check if the required arguments for catchup are present.
+
+        Args:
+        - parsed_args: The parsed arguments.
+
+        Returns:
+        - A tuple containing a boolean indicating whether the required arguments are present and a message.
+        """
         missing_args = []
         if not parsed_args.channel:
             missing_args.append("channel")
@@ -37,30 +55,26 @@ class TPLAY:
         else:
             return True, ""
 
-    def start_process(self):
-        msg = self.message.reply_text(LOG_MESSAGE.format("Processing...", "Channel ", self.parsed_args.channel))
-        if not self.check_before_continue(msg):
-            return
-
-    def check_before_continue(self, msg):
-        try:
-            if self.parsed_args.channel:
+    def check_before_continue(self):
+        if self.parsed_args.channel:
+            try:
                 self.channel_data = self.ott_api.get_data()
-        except Exception as e:
-            msg.edit(LOG_MESSAGE.format("ERROR", "CHANNEL", e))
-            return False
+            except Exception as e:
+                self.msg.edit(
+                    LOG_MESSAGE.format("ERROR", "CHANNEL", e))
+                return
 
         if self.parsed_args.start:
-            can_continue, msg_text = self.check_catchup_data(self.parsed_args)
+            can_continue, msg = self.check_catchup_data(self.parsed_args)
 
-            if not can_continue:
-                msg.edit(LOG_MESSAGE.format("ERROR", "CATCHUP", msg_text))
-                return False
+            if can_continue:
+                self.download_catchup()
+            else:
+                self.msg.edit(
+                    LOG_MESSAGE.format("ERROR", "CATCHUP", msg))
+                return
 
-        self.download_catchup(msg)
-        return True
-
-    def download_catchup(self, msg):
+    def download_catchup(self):
         date_text = "{}-{}".format(self.parsed_args.start, self.parsed_args.end)
         begin, end, date_data, time_data = get_tplay_past_details(date_text)
         hmac = self.ott_api.get_hmac()
@@ -71,8 +85,8 @@ class TPLAY:
 
         name = "{} {}".format(init_title, time_data)
 
-        msg.edit(LOG_MESSAGE.format("Downloading...", "Catchup", name))
         self.msg.delete()
+
         Processor(
             self.app, 
             self.message, 
@@ -86,3 +100,7 @@ class TPLAY:
             ott=self.ott, 
             fallback_language=None,
             headers=self.channel_data.get('manifest_headers')).start_process()
+
+    def start_process(self):
+        self.msg = self.message.reply_text(LOG_MESSAGE.format("Processing..." , "Channel " , self.parsed_args.channel))
+        self.check_before_continue()
