@@ -182,14 +182,14 @@ def booted(bot):
 def start_bots():
     print("Processing.....")
     try:
-        app.start()
+        app.run()
         logger.info(f"Bot is Running....")
     except Exception as e:
         logger.info(f"Bot Error: {e}")
 
     if TG_CONFIG.stringhi:
         try:
-            USERBOT.start()
+            USERBOT.run()
             logger.info(f"UserBot is Running...")
         except Exception as e:
             logger.info(f"UserBot Error: {e}")
