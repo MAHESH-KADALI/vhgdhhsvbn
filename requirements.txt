@@ -1,5 +1,5 @@
 pyromod==1.5
-pyroblack
+pyrogram
 tgcrypto
 requests
 hachoir
