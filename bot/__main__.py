@@ -169,28 +169,21 @@ async def start_cmd_handler(app, message):
 
 # Assuming TG_CONFIG, logger, app, and USERBOT are defined elsewhere in your code
 
-async def send_restart_notification(app, chats):
-    """Send a restart notification to specified chats."""
-    for chat_id in chats:
-        await app.send_message(chat_id, "The Bot is Restarted Now")
+async def sendFile(message, file):
+    try:
+        return await message.reply_document(document=file)
+    except Exception as e:
+        LOGGER.error(str(e))
+        return str(e)
 
-async def start_app(app):
-    """Start the app."""
-    await app.start()
-    logger.info(f"{app.__class__.__name__} is Running....")
+async def log(_, message):
+    await sendFile(message, 'log.txt')
 
 async def main():
-    """Main function to start the apps and send restart notifications."""
-    chats = TG_CONFIG.sudo_users
-    await start_app(app)
-    if TG_CONFIG.stringhi:
-        await start_app(USERBOT)
-    await send_restart_notification(app, chats)
+    await app.start()
+    app.add_handler(MessageHandler(log, filters=command('log')))
     await idle()
     await app.stop()
-    if TG_CONFIG.stringhi:
-        await USERBOT.stop()
 
 if __name__ == "__main__":
-    logger.info("Starting...")
     app.loop.run_until_complete(main())
