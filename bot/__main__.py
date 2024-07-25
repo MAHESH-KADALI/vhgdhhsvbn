@@ -8,7 +8,8 @@ from pyrogram.types import User
 from os import execl
 from sys import executable
 from time import sleep, time
-
+#import logging
+#import asyncio
 from pyrogram import Client, enums, filters
 from pyrogram.errors import FloodWait, RPCError
 from pyrogram import filters, idle, Client
@@ -163,42 +164,30 @@ async def start_cmd_handler(app, message):
     await message.reply_text(START_MSG.format(message.from_user.username, code))
 
 
+# Assuming TG_CONFIG, logger, app, and USERBOT are defined elsewhere in your code
 
-def booted(bot):
+async def send_restart_notification(app, chats):
+    """Send a restart notification to specified chats."""
+    for chat_id in chats:
+        await app.send_message(chat_id, "The Bot is Restarted Now")
+
+async def start_app(app):
+    """Start the app."""
+    await app.start()
+    logger.info(f"{app.__class__.__name__} is Running....")
+
+async def main():
+    """Main function to start the apps and send restart notifications."""
     chats = TG_CONFIG.sudo_users
-
-    try:
-        logger.info(f"Added Counting")
-    except Exception as e:
-        logger.info(f"Main Error: {e}")
-
-    for i in chats:
-        try:
-            bot.send_message(i, "The Bot is Restarted Now")
-        except Exception:
-            logger.info(f"Not found id {i}")
-
-
-def start_bots():
-    print("Processing.....")
-    try:
-        app.run()
-        logger.info(f"Bot is Running....")
-    except Exception as e:
-        logger.info(f"Bot Error: {e}")
-
+    await start_app(app)
     if TG_CONFIG.stringhi:
-        try:
-            USERBOT.run()
-            logger.info(f"UserBot is Running...")
-        except Exception as e:
-            logger.info(f"UserBot Error: {e}")
-
-    booted(app)
-    idle()
+        await start_app(USERBOT)
+    await send_restart_notification(app, chats)
+    await idle()
+    await app.stop()
+    if TG_CONFIG.stringhi:
+        await USERBOT.stop()
 
 if __name__ == "__main__":
-    try:
-        loop.run_until_complete(start_bots())
-    except KeyboardInterrupt:
-        logger.info(f"Bots Stopped!! Problem in runloop")
+    logger.info("Starting...")
+    app.loop.run_until_complete(main())
