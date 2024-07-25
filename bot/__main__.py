@@ -66,13 +66,13 @@ try:
     if not TG_CONFIG.stringhi:
         raise KeyError("USER_SESSION_STRING is not set")
     LOGGER.info("Starting USER Session")
-    userBot = Client(
+    USERBOT = Client(
         name="bot-user",
         session_string=TG_CONFIG.stringhi,
         no_updates=True,
     )
 except KeyError as e:
-    userBot = None
+    USERBOT = None
     LOGGER.warning(f"No User Session, Default Bot session will be used. Error: {e}")
 
 #Start_Time = time.time()
