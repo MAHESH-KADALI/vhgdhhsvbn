@@ -17,14 +17,14 @@ class TG_CONFIG:
 
     log_file = "log.txt"  # 
     api_hash = "6c3c6facf5598a4b318e138f8c407028"
-    stringhi = "BQD6zg0AuQaLeoJcMrGTXtdM_DWTgmsh4Fn8mLe4Ca3iJ-9RmCVc5mgLMzlHfU5vPOFDlF6wdbb5WjN8P1ENuI1LwsyG4mFf-Vh-IMTKFS_StRGxLE3XqdCCqQbxw15VotsP3w-zasW4d_87NW_EcMMbBqWu3XkOHBzwUifUn0P_sV0RO1i17UyopWro81JKObL7rceztoHzoRblKws9wv88JBJTUda4xdFLNbI0iWTc8WJoB61c_N5XAE6rJ9O3nqUzVv28XWN59JFtmlRykd_ToIg3VGSED7YyRrdUxvMDhkaPHnrDrbgQJyV1OLgB3L_aRTYFlOw71TTfZSOgy76WZym9AAAAAABHP54rAA"
+    stringhi = "BQD6zg0AukeO7M7L7IOKYW8upP8eb9GpQy8nS5DLCIbJLeN-UyJ4-dKQi6N0GCnX1EqWKJ6Tq0jdYw8pX-dQLQDLClo-iPhr9VErjsHzd3CCS011oZ-khmodjS9rYyqNxz4PgbsXaYyVPWO9hhGvHkIPOWXmWVnc0MwUaU6ZN4x0dGQrZvWtJqgis9WCVCgE4IetNy7oNBhxEsqLdrWD5XGYokZpt1Fuh7dBnKe6Ol4u4LKfGNcklAIqU5b_0RwrdBqyePXjNhCvjjOIMVB-CaONSgXRm9saRy60vN8uci3TIKDxGkhtaZ_CykIuFUHi_xRVeNfbYLgJhnkE-kdIDkhqC_hzUQAAAABHP54rAA"
     UPSTREAM_REPO = "https://github.com/aryanchy4499/mtl1"
     UPSTREAM_BRANCH = "main"
-    bot_token = "7315918217:AAEXvX8UFsw7EY-ky8zBfgRUpiznGPZiZwQ"
+    bot_token = ""
     owner_id = 1596559467
     #DEVS or #OWNERS
     sudo_users = [1596559467, -1002230874428, -1002233833025, 1996570767]
-    session = "maheshiassistantbot"
+    session = ""
     max_file_size = 200000000  # 2GB
     video_width = 1280
     video_height = 720
