@@ -192,9 +192,9 @@ if __name__ == "__main__":
     #     bot_username = bot.username
 
     try:
-        with userBot:
-            user = userBot.get_me()
-            Config.IS_PREMIUM = user.is_premium
+        with USERBOT:
+            user = USERBOT.get_me()
+            TG_CONFIG.premium = user.is_premium
         LOGGER.info("Bot boot successfully!")
     except Exception as err:
         LOGGER.error(f"{err}")
