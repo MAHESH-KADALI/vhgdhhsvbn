@@ -62,15 +62,18 @@ app = Client(
     
 )
 
-if TG_CONFIG.stringhi:
-    USERBOT = Client(
-        "cmuserbot",
+try:
+    if not TG_CONFIG.stringhi:
+        raise KeyError("USER_SESSION_STRING is not set")
+    LOGGER.info("Starting USER Session")
+    userBot = Client(
+        name="bot-user",
         session_string=TG_CONFIG.stringhi,
-        api_id=TG_CONFIG.api_id,
-        api_hash=TG_CONFIG.api_hash,
+        no_updates=True,
     )
-else:
-    USERBOT = None
+except KeyError as e:
+    userBot = None
+    LOGGER.warning(f"No User Session, Default Bot session will be used. Error: {e}")
 
 #Start_Time = time.time()
 
